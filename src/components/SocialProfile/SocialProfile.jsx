@@ -1,34 +1,48 @@
-// import propTypes from "prop-types";
-// import React from "react";
-import styles from './socialprofile.module.css'
-export default function SocialProfile({username, tag, location, avatar, stats}) {
+// import styles from './socialprofile.module.css'
+import PropTypes from 'prop-types';
+import { Profile, Description, Avatar, Name, Tag, Location, Stats, StatsList, Label, Quantity } from './SocialProfile.styled';
+
+export default function SocialProfile({ username, tag, location, avatar, stats }) {
+    const { followers, likes, views } = stats;
     return (
-        <div className={styles.profile}>
-            <div className={styles.description}>
-                <img
+        <Profile>
+            <Description>
+                <Avatar
                     src={avatar}
                     alt={username}
-                    className={styles.avatar}
+                    
                 />
-                <p className={styles.name}>{username}</p>
-                <p className={styles.tag}>@{tag}</p>
-                <p className={styles.location}>{location}</p>
-            </div>
+                <Name>{username}</Name>
+                <Tag>@{tag}</Tag>
+                <Location>{location}</Location>
+            </Description>
 
-            <ul className={styles.stats}>
-                <li>
-                    <span className={styles.label}>Followers</span>
-                    <span className={styles.quantity}>{stats.followers}</span>
-                </li>
-                <li>
-                    <span className={styles.label}>Views</span>
-                    <span className={styles.quantity}>{stats.views}</span>
-                </li>
-                <li>
-                    <span className={styles.label}>Likes</span>
-                    <span className={styles.quantity}>{stats.likes}</span>
-                </li>
-            </ul>
-        </div>
+            <Stats>
+                <StatsList>
+                    <Label>Followers</Label>
+                    <Quantity>{followers}</Quantity>
+                </StatsList>
+                <StatsList>
+                    <Label>Views</Label>
+                    <Quantity>{views}</Quantity>
+                </StatsList>
+                <StatsList>
+                    <Label>Likes</Label>
+                    <Quantity>{likes}</Quantity>
+                </StatsList>
+            </Stats>
+        </Profile>
     );
 }
+
+SocialProfile.propTypes = {
+  username: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  stats: PropTypes.shape({
+    followers: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
+  }),
+};
