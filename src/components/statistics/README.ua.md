@@ -49,3 +49,5 @@ import data from "/путь/к/data.json";
 <Statistics title="Upload stats" stats={data} />;
 <Statistics stats={data} />;
 ```
+
+<!-- _________________________________ -->
